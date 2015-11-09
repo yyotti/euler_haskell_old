@@ -1,6 +1,7 @@
 # Project Euler を Haskell で解く
+Haskell の勉強ついでに Project Euler を Haskell で解いていく。
 
-# 回答
+## 回答
 src/main/Problem/ に入っている。
 
 src/main/Common/ には共通で使う関数などが入っている。
@@ -11,7 +12,7 @@ $ runhaskell -isrc/main src/main/Problem/Pxxx.hs
 ```
 で実行できる。xxx は問題の番号。
 
-# テスト
+## テスト
 src/test/Problem/ に入っている。
 
 1つの問題に対するテストを実行したいなら
@@ -28,7 +29,7 @@ $ runhaskell -isrc/main -isrc/test src/test/Spec.hs
 ```
 で実行できる。
 
-# コンパイル警告
+## コンパイル警告
 コンパイル時の警告をチェックしたいなら、上記のコマンドに `-Wall` オプションをつければよい。
 
 ```sh

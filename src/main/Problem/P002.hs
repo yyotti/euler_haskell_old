@@ -15,15 +15,25 @@ import Data.Time
 - [結果]
 - 4613732
 - time:13.474108s
+-
+- [コミット]
+- 45db11e
 -}
-fib :: Int -> Integer
-fib 1 = 1
-fib 2 = 2
-fib n | n >= 3 = fib (n - 1) + fib (n - 2)
-      | otherwise = 0
+
+{-
+- [方針2]
+- フィボナッチ数列の無限リストを定義し、値が400万以下の要素をさらに偶数で絞って
+- 和をとる。
+-
+- [結果]
+- 4613732
+- time:0.00021s
+-}
+fib :: [Integer]
+fib = 1 : 2 : (map (\ (a, b) -> a + b) $ zip fib $ tail fib)
 
 solve :: Int -> Integer
-solve n = sum $ filter even $ takeWhile ((<= n) . fromIntegral) $ map fib [1..]
+solve n = sum $ filter even $ takeWhile ((<= n) . fromIntegral) fib
 
 main :: IO ()
 main = do

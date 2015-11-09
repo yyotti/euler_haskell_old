@@ -1,5 +1,6 @@
 module Problem.P002 where
 import Data.Time
+import Common.Arithmetic
 
 {-
 - Even Fibonacci numbers
@@ -29,11 +30,11 @@ import Data.Time
 - 4613732
 - time:0.00021s
 -}
-fib :: [Integer]
-fib = 1 : 2 : (map (\ (a, b) -> a + b) $ zip fib $ tail fib)
+fib' :: [Integer]
+fib' = tail fib
 
 solve :: Int -> Integer
-solve n = sum $ filter even $ takeWhile ((<= n) . fromIntegral) fib
+solve n = sum $ filter even $ takeWhile ((<= n) . fromIntegral) fib'
 
 main :: IO ()
 main = do

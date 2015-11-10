@@ -7,12 +7,26 @@ import Data.Time
 -}
 
 {-
-- [回答方針]
+- [方針1]
+- 先頭から地道に1つずつやっていく
 -
 - [結果]
+- 23514624000
+- time:0.009924s
 -}
+
+digits :: Integer -> [Integer]
+digits n | n < 0 = []
+         | otherwise = digits' n []
+  where digits' k ls | k < 10 = k : ls
+                     | otherwise = digits' (k `div` 10) $ (k `mod` 10) : ls
+
+findLargestProduct :: Int -> [Integer] -> Integer
+findLargestProduct k ns | k > length ns = 0
+findLargestProduct k ns = max (product $ take k ns) $ findLargestProduct k $ tail ns
+
 solve :: Int -> Integer -> Integer
-solve _ _ = undefined
+solve k n = findLargestProduct k $ digits n
 
 main :: IO ()
 main = do

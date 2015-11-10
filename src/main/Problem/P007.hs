@@ -1,5 +1,6 @@
 module Problem.P007 where
 import Data.Time
+import Common.Arithmetic
 
 {-
 - 10001st prime
@@ -7,12 +8,15 @@ import Data.Time
 -}
 
 {-
-- [回答方針]
+- [方針1]
+- 素直に素数列のn番目を取得する。
 -
 - [結果]
+- 104743
+- time:0.916264s
 -}
 solve :: Int -> Integer
-solve _ = undefined
+solve n = primes !! (n - 1)
 
 main :: IO ()
 main = do

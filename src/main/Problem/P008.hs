@@ -1,6 +1,5 @@
 module Problem.P008 where
 import Data.Time
-import Data.List
 
 {-
 - Largest product in a series
@@ -26,6 +25,20 @@ import Data.List
 - [結果]
 - 23514624000
 - time:0.006807s
+-
+- [コミット]
+- cb33430
+-}
+
+{-
+- [方針3]
+- 対象の数字nを桁ごとに分けたリストを0で区切る。
+- 区切られた区間ごとに最大値を算出し、その後全体の最大値をとる。
+- 区間内に指定された桁数だけの数字がない区間は最大値0としてしまえばよい。
+-
+- [結果]
+- 23514624000
+- time:0.004882s
 -}
 digits :: Integer -> [Integer]
 digits n | n < 0 = []
@@ -34,11 +47,13 @@ digits n | n < 0 = []
                      | otherwise = digits' (k `div` 10) $ (k `mod` 10) : ls
 
 findLargestProduct :: Int -> [Integer] -> Integer
-findLargestProduct k ns | k > length ns = 0
-findLargestProduct k ns = max (product $ take k nums) $ findLargestProduct k $ tail nums
-  where nums = case findIndex (== 0) (take k ns) of
-                    Just i -> drop (i + 1) ns
-                    Nothing -> ns
+findLargestProduct _ [] = 0
+findLargestProduct k ns = max (findLP nums) (findLargestProduct k rest)
+  where (nums, rest) = case span (/= 0) ns of
+                            (xs, []) -> (xs, [])
+                            (xs, (_:ys)) -> (xs, ys)
+        findLP xs | k > length xs = 0
+                  | otherwise = max (product $ take k xs) (findLP $ tail xs)
 
 solve :: Int -> Integer -> Integer
 solve k n = findLargestProduct k $ digits n

@@ -7,12 +7,18 @@ import Data.Time
 -}
 
 {-
-- [回答方針]
+- [方針1]
+- 問題に書かれていることをそのままやる。
 -
 - [結果]
+- 25164150
+- time:0.000244s
 -}
-solve :: Int -> Integer
-solve _ = undefined
+
+solve :: Integer -> Integer
+solve n = sumB^(2 :: Int) - sumA
+  where sumA = sum $ map (^(2 :: Int)) [1..n]
+        sumB = sum [1..n]
 
 main :: IO ()
 main = do

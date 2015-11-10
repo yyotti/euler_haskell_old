@@ -1,5 +1,6 @@
 module Problem.P008 where
 import Data.Time
+import Data.List
 
 {-
 - Largest product in a series
@@ -13,8 +14,19 @@ import Data.Time
 - [結果]
 - 23514624000
 - time:0.009924s
+-
+- [コミット]
+- d02ca98
 -}
 
+{-
+- [方針2]
+- 先頭から調べるが、0を含む区間があったらそこをスキップする処理を加える。
+-
+- [結果]
+- 23514624000
+- time:0.006807s
+-}
 digits :: Integer -> [Integer]
 digits n | n < 0 = []
          | otherwise = digits' n []
@@ -23,7 +35,10 @@ digits n | n < 0 = []
 
 findLargestProduct :: Int -> [Integer] -> Integer
 findLargestProduct k ns | k > length ns = 0
-findLargestProduct k ns = max (product $ take k ns) $ findLargestProduct k $ tail ns
+findLargestProduct k ns = max (product $ take k nums) $ findLargestProduct k $ tail nums
+  where nums = case findIndex (== 0) (take k ns) of
+                    Just i -> drop (i + 1) ns
+                    Nothing -> ns
 
 solve :: Int -> Integer -> Integer
 solve k n = findLargestProduct k $ digits n

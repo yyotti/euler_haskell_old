@@ -69,12 +69,13 @@ import Data.Time
 - time:0.000201s
 -}
 
+primitivePythagoreanMNs :: [(Int, Int)]
+primitivePythagoreanMNs = concatMap (\ m -> map (\ n -> (m, n)) $ filter (\ n -> odd (m - n) && gcd m n == 1) [1..(m - 1)]) [1..]
+
 findSpecialPythagoreanTriprets :: Int -> [(Int, Int, Int)]
 findSpecialPythagoreanTriprets k | odd k = []
                                  | otherwise = map toABC $ filter (\ (m, n) -> k `mod` (2 * m * (m + n)) == 0) mns
-  where ms = takeWhile (\ m -> 2 * m * m <= k) [1..]
-        ns m = filter (\ n -> odd (m - n) && gcd m n == 1) [1..(m - 1)]
-        mns = concatMap (\ m -> map (\ n -> (m, n)) $ ns m) ms
+  where mns = takeWhile (\ (m, _) -> 2 * m * m <= k) primitivePythagoreanMNs
         toABC (m, n) = let w = k `div` (2 * m * (m + n))
                            in (w * (m * m - n * n), w * 2 * m * n, w * (m * m + n * n))
 

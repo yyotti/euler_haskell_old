@@ -14,7 +14,7 @@ spec = do
 
   describe "primes" $ do
     it "first 10 terms are [2,3,5,7,11,13,19,23,29,31]" $ do
-      take 10 (primes :: [Int]) `shouldBe` [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]
+      take 10 primes `shouldBe` [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]
 
   describe "isPrime" $ do
     it "returns False when n = 1" $ do

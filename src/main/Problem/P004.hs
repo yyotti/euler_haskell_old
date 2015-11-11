@@ -18,19 +18,28 @@ import Data.Time
 - [結果]
 - 906609
 - time:1.570827s
+-
+- [コミット]
+- 8b95054
 -}
 
-combinations :: Int -> [a] -> [[a]]
-combinations 0 _ = [[]]
-combinations _ [] = []
-combinations r (x:xs) = comb1 ++ comb2
-  where comb1 = map (x:) $ combinations (r - 1) xs
-        comb2 = combinations r xs
+{-
+- [方針2]
+- 回文数になるためには、掛け合わせる2つの数のいずれか一方が11の倍数でなければ
+- ならない。そこで、n桁のリストを2つ作り、片方は11の倍数のみをもつリストにして、
+- 2つのリスト間で要素の組み合わせを作る。
+-
+- [結果]
+- 906609
+- time:0.105413s
+-}
 
 products :: Integral a => a -> [a]
 products n | n < 1 = []
-           | otherwise = (map (\ [x, y] -> x * y) $ combinations 2 nums) ++ (map (^(2 :: Int)) nums)
-  where nums = [10^(n - 1) .. 10^n - 1]
+           | otherwise = (map (\ [x, y] -> x * y) $ sequence [nums1, nums2])
+  where nums1 = [10^(n - 1) .. 10^n - 1]
+        nums2 | n == 1 = nums1
+              | otherwise = filter ((== 0) . (`mod` 11)) nums1
 
 isPalindrome :: (Show a) => a -> Bool
 isPalindrome x = show x == reverse (show x)

@@ -1,5 +1,6 @@
 module Problem.P010 where
 import Data.Time
+import Common.Arithmetic
 
 {-
 - Summation of primes
@@ -8,11 +9,14 @@ import Data.Time
 
 {-
 - [方針1]
+- 素数列の小さい方から指定された最大値まで取り出して和をとる
 -
 - [結果]
+- 142913828922
+- time:36.233071s
 -}
-solve :: Int -> Integer
-solve _ = undefined
+solve :: Integer -> Integer
+solve n = sum $ takeWhile (<= n) primes
 
 main :: IO ()
 main = do

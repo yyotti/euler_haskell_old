@@ -23,6 +23,8 @@ $ runhaskell -isrc/main src/main/Main.hs
 ```
 
 これだけで実行すると、登録されている問題全ての回答を計算・表示する。
+ただし、最適化がされていない状態なので、問題によっては無駄に時間がかかる。
+（フィボナッチ数列でメモ化されなかったりするため）
 
 ## テスト
 src/test/Problem/ に入っている。
@@ -50,3 +52,20 @@ $ runhaskell -Wall -isrc/main src/test/Problem/PxxxSpec.hs
 ```
 
 ただしビルドするわけではないので、その問題に関係するファイルに対する警告しか出ない。
+
+## ビルド
+下記のコマンドで、クリーンビルド→テスト実行ができる。
+```sh
+$ cabal clean && cabal configure --enable-tests && cabal build && cabal test
+```
+
+ビルド後の全テストを実行したいなら、
+```sh
+$ ./dist/build/spec/spec
+```
+で実行できる。
+
+ビルド後のMainを実行したいなら、
+```sh
+$ ./dist/build/euler_haskell/euler_haskell
+```

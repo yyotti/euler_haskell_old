@@ -11,7 +11,7 @@ module Problem.P011 where
 -
 - [結果]
 - 70600674
-- time:0.009746s
+- time:0.001392s
 -}
 
 horizontalPart :: Int -> Int -> Int -> [[a]] -> [a]
@@ -38,7 +38,7 @@ diagonalPart2 i j n g | i > length g - n = []
                       | j >= length g = []
                       | otherwise = map (\ k -> g !! (i + k) !! (j - k)) [0..(n - 1)]
 
-solve :: Int -> [[Int]] -> Integer
+solve :: Integral a => Int -> [[a]] -> Integer
 solve n g = toInteger $ maximum $ map toProducts points
   where points = concatMap (\ i -> map (\ j -> (i, j)) [0..(length (g !! i))]) [0..(length g - 1)]
         toProducts (i, j) = h `max` v `max` d1 `max` d2

@@ -12,8 +12,8 @@ module Problem.P005 where
 -
 - [結果]
 - 232792560
-- time:0.000186s
+- time:0.000055s
 -}
-solve :: Integer -> Integer -> Integer
+solve :: Integral a => a -> a -> Integer
 solve m n | m > n = 0
-          | otherwise = foldr (lcm) 1 [m .. n]
+          | otherwise = toInteger $ foldr lcm 1 [m .. n]

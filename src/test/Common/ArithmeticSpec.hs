@@ -9,8 +9,8 @@ main = hspec spec
 spec :: Spec
 spec = do
   describe "fib" $ do
-    it "first 10 terms are [1,1,2,3,5,8,13,21,34,55]" $ do
-      take 10 fib `shouldBe` [1, 1, 2, 3, 5, 8, 13, 21, 34, 55]
+    it "first 10 terms are [0,1,1,2,3,5,8,13,21,34]" $ do
+      take 10 (fib :: [Integer]) `shouldBe` [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
 
   describe "primes" $ do
     it "first 10 terms are [2,3,5,7,11,13,19,23,29,31]" $ do

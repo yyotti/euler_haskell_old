@@ -14,7 +14,7 @@ import Common.Arithmetic
 -
 - [結果]
 - 4613732
-- time:13.474108s
+- time:0.175032s
 -
 - [コミット]
 - 45db11e
@@ -27,10 +27,8 @@ import Common.Arithmetic
 -
 - [結果]
 - 4613732
-- time:0.00021s
+- time:0.000029s
 -}
-fib' :: [Integer]
-fib' = tail fib
-
 solve :: Int -> Integer
 solve n = sum $ filter even $ takeWhile ((<= n) . fromIntegral) fib'
+  where fib' = drop 2 (fib :: [Integer])

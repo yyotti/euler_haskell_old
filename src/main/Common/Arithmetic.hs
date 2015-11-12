@@ -1,8 +1,10 @@
 module Common.Arithmetic where
 import Data.List
 
-fib :: [Integer]
-fib = 1 : 1 : (map (\ (a, b) -> a + b) $ zip fib $ tail fib)
+{-# SPECIALIZE fib :: [Int] #-}
+{-# SPECIALIZE fib :: [Integer] #-}
+fib :: Integral a => [a]
+fib = 0 : 1 : (zipWith (+) fib $ tail fib)
 
 primes :: [Integer]
 primes = 2 : filter isPrime [3, 5 ..]

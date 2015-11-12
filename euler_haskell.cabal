@@ -15,7 +15,7 @@ cabal-version:       >=1.8
 
 executable euler_haskell
   ghc-options:
-      -Wall
+      -W
       -O3
   hs-source-dirs:
       src/main
@@ -29,7 +29,7 @@ test-suite spec
   type:
       exitcode-stdio-1.0
   ghc-options:
-      -Wall
+      -W
       -O3
   hs-source-dirs:
       src/main

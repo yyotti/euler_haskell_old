@@ -31,4 +31,4 @@ import Common.Arithmetic
 -}
 solve :: Int -> Integer
 solve n = sum $ filter even $ takeWhile ((<= n) . fromIntegral) fib'
-  where fib' = drop 2 (fib :: [Integer])
+  where fib' = drop 2 fib

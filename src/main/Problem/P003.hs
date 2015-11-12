@@ -12,7 +12,7 @@ import Common.Arithmetic
 -
 - [結果]
 - 6857
-- time:0.007092s
+- time:0.006323s
 -}
 
 solve :: Integer -> Integer

@@ -11,5 +11,5 @@ spec = do
   describe "solve" $ do
     it "returns 29 when n = 13195" $ do
       solve 13195 `shouldBe` 29
-    it "returns 6857 when n = 600851475143" $ do
-      solve 600851475143 `shouldBe` 6857
+    it "returns 6857 when n = 1234321" $ do
+      solve 1234321 `shouldBe` 101

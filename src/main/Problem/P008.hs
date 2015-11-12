@@ -11,7 +11,7 @@ module Problem.P008 where
 -
 - [結果]
 - 23514624000
-- time:0.009924s
+- time:0.004077s
 -
 - [コミット]
 - d02ca98
@@ -23,7 +23,7 @@ module Problem.P008 where
 -
 - [結果]
 - 23514624000
-- time:0.006807s
+- time:0.002567s
 -
 - [コミット]
 - cb33430
@@ -37,15 +37,15 @@ module Problem.P008 where
 -
 - [結果]
 - 23514624000
-- time:0.004882s
+- time:0.002147s
 -}
-digits :: Integer -> [Integer]
+digits :: Integral a => a -> [a]
 digits n | n < 0 = []
          | otherwise = digits' n []
   where digits' k ls | k < 10 = k : ls
                      | otherwise = digits' (k `div` 10) $ (k `mod` 10) : ls
 
-findLargestProduct :: Int -> [Integer] -> Integer
+findLargestProduct :: Integral a => Int -> [a] -> a
 findLargestProduct _ [] = 0
 findLargestProduct k ns = max (findLP nums) (findLargestProduct k rest)
   where (nums, rest) = case span (/= 0) ns of
@@ -54,5 +54,5 @@ findLargestProduct k ns = max (findLP nums) (findLargestProduct k rest)
         findLP xs | k > length xs = 0
                   | otherwise = max (product $ take k xs) (findLP $ tail xs)
 
-solve :: Int -> Integer -> Integer
-solve k n = findLargestProduct k $ digits n
+solve :: Integral a => Int -> a -> Integer
+solve k n = toInteger $ findLargestProduct k $ digits n

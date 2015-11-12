@@ -16,7 +16,7 @@ module Problem.P004 where
 -
 - [結果]
 - 906609
-- time:1.570827s
+- time:0.088629s
 -
 - [コミット]
 - 8b95054
@@ -30,12 +30,12 @@ module Problem.P004 where
 -
 - [結果]
 - 906609
-- time:0.105413s
+- time:0.01853s
 -}
 
 products :: Integral a => a -> [a]
 products n | n < 1 = []
-           | otherwise = (map (\ [x, y] -> x * y) $ sequence [nums1, nums2])
+           | otherwise = (map product $ sequence [nums1, nums2])
   where nums1 = [10^(n - 1) .. 10^n - 1]
         nums2 | n == 1 = nums1
               | otherwise = filter ((== 0) . (`mod` 11)) nums1

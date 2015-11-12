@@ -43,5 +43,5 @@ products n | n < 1 = []
 isPalindrome :: (Show a) => a -> Bool
 isPalindrome x = show x == reverse (show x)
 
-solve :: (Integral a, Show a) => a -> a
-solve n = maximum $ filter isPalindrome $ products n
+solve :: (Integral a, Show a) => a -> Integer
+solve n = toInteger $ maximum $ filter isPalindrome $ products n

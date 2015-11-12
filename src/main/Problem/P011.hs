@@ -38,8 +38,8 @@ diagonalPart2 i j n g | i > length g - n = []
                       | j >= length g = []
                       | otherwise = map (\ k -> g !! (i + k) !! (j - k)) [0..(n - 1)]
 
-solve :: Int -> [[Int]] -> Int
-solve n g = maximum $ map toProducts points
+solve :: Int -> [[Int]] -> Integer
+solve n g = toInteger $ maximum $ map toProducts points
   where points = concatMap (\ i -> map (\ j -> (i, j)) [0..(length (g !! i))]) [0..(length g - 1)]
         toProducts (i, j) = h `max` v `max` d1 `max` d2
           where h = product $ horizontalPart i j n g

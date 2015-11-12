@@ -78,7 +78,7 @@ findSpecialPythagoreanTriprets k | odd k = []
         toABC (m, n) = let w = k `div` (2 * m * (m + n))
                            in (w * (m * m - n * n), w * 2 * m * n, w * (m * m + n * n))
 
-solve :: Int -> Int
+solve :: Int -> Integer
 solve n = case findSpecialPythagoreanTriprets n of
                [] -> 0
-               ((a, b, c):_) -> a * b * c
+               ((a, b, c):_) -> toInteger $ a * b * c

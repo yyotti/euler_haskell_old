@@ -43,5 +43,5 @@ sum' :: Int -> Int -> Int
 sum' a n = a * m * (m + 1) `div` 2
   where m = (n - 1) `div` a
 
-solve :: Int -> Int
-solve n = sum' 3 n + sum' 5 n - sum' 15 n
+solve :: Int -> Integer
+solve n = toInteger $ sum' 3 n + sum' 5 n - sum' 15 n

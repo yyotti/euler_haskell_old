@@ -11,7 +11,7 @@ module Problem.P006 where
 -
 - [結果]
 - 25164150
-- time:0.000244s
+- time:0.000055s
 -
 - [コミット]
 - 4c637f3
@@ -39,8 +39,8 @@ module Problem.P006 where
 -
 - [結果]
 - 25164150
-- time:0.000165s
+- time:0.000022s
 -}
 
-solve :: Integer -> Integer
-solve n = n * (n - 1) * (n + 1) * (3 * n + 2) `div` 12
+solve :: Integral a => a -> Integer
+solve n = toInteger $ n * (n - 1) * (n + 1) * (3 * n + 2) `div` 12

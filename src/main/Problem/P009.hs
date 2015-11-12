@@ -29,7 +29,7 @@ module Problem.P009 where
 -
 - [結果]
 - 31875000
-- time:0.113426s
+- time:0.002259s
 -
 - [コミット]
 - 21a086d
@@ -65,20 +65,20 @@ module Problem.P009 where
 -
 - [結果]
 - 31875000
-- time:0.000201s
+- time:0.000042s
 -}
 
-primitivePythagoreanMNs :: [(Int, Int)]
+primitivePythagoreanMNs :: Integral a =>  [(a, a)]
 primitivePythagoreanMNs = concatMap (\ m -> map (\ n -> (m, n)) $ filter (\ n -> odd (m - n) && gcd m n == 1) [1..(m - 1)]) [1..]
 
-findSpecialPythagoreanTriprets :: Int -> [(Int, Int, Int)]
+findSpecialPythagoreanTriprets :: Integral a => a -> [(a, a, a)]
 findSpecialPythagoreanTriprets k | odd k = []
                                  | otherwise = map toABC $ filter (\ (m, n) -> k `mod` (2 * m * (m + n)) == 0) mns
   where mns = takeWhile (\ (m, _) -> 2 * m * m <= k) primitivePythagoreanMNs
         toABC (m, n) = let w = k `div` (2 * m * (m + n))
                            in (w * (m * m - n * n), w * 2 * m * n, w * (m * m + n * n))
 
-solve :: Int -> Integer
+solve :: Integral a => a -> Integer
 solve n = case findSpecialPythagoreanTriprets n of
                [] -> 0
                ((a, b, c):_) -> toInteger $ a * b * c

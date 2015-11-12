@@ -25,5 +25,5 @@ spec = do
       findSpecialPythagoreanTriprets 32 `shouldBe` []
 
   describe "solve" $ do
-    it "returns 31875000 when n = 1000" $ do
-      solve 1000 `shouldBe` 31875000
+    it "returns 60000 when n = 120" $ do
+      solve 120 `shouldBe` 60000

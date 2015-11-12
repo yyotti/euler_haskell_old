@@ -2,15 +2,27 @@
 Haskell の勉強ついでに Project Euler を Haskell で解いていく。
 
 ## 回答
-src/main/Problem/ に入っている。
+src/main/Problem/ に各問題がモジュールとして入っている。
 
 src/main/Common/ には共通で使う関数などが入っている。
 
+src/main/Main.hs で回答を計算・表示できる。
+
 ```sh
 $ cd /path/to/this/project
-$ runhaskell -isrc/main src/main/Problem/Pxxx.hs
+$ runhaskell -isrc/main src/main/Main.hs XXX
 ```
-で実行できる。xxx は問題の番号。
+
+XXX は問題の番号。番号を指定した場合は所要時間(概算)も表示される。
+
+問題番号を指定せず
+
+```sh
+$ cd /path/to/this/project
+$ runhaskell -isrc/main src/main/Main.hs
+```
+
+これだけで実行すると、登録されている問題全ての回答を計算・表示する。
 
 ## テスト
 src/test/Problem/ に入っている。
@@ -31,15 +43,10 @@ $ runhaskell -isrc/main -isrc/test src/test/Spec.hs
 
 ## コンパイル警告
 コンパイル時の警告をチェックしたいなら、上記のコマンドに `-Wall` オプションをつければよい。
-
-```sh
-# 例) 普通に回答を実行する場合
-$ runhaskell -Wall -isrc/main src/main/Problem/Pxxx.hs
-```
-
 テストのときにつけるとメインの方の警告も出るので一石二鳥。
 
 ```sh
-# 例) テストでコンパイル警告も出す
 $ runhaskell -Wall -isrc/main src/test/Problem/PxxxSpec.hs
 ```
+
+ただしビルドするわけではないので、その問題に関係するファイルに対する警告しか出ない。

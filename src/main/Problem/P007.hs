@@ -1,5 +1,4 @@
 module Problem.P007 where
-import Data.Time
 import Common.Arithmetic
 
 {-
@@ -17,12 +16,3 @@ import Common.Arithmetic
 -}
 solve :: Int -> Integer
 solve n = primes !! (n - 1)
-
-main :: IO ()
-main = do
-  x <- getCurrentTime
-  print $ solve 10001
-  y <- getCurrentTime
-
-  putStr "time:"
-  print $ diffUTCTime y x

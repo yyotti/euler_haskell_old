@@ -1,5 +1,4 @@
 module Problem.P001 where
-import Data.Time
 
 {-
 - Multiples of 3 and 5
@@ -46,12 +45,3 @@ sum' a n = a * m * (m + 1) `div` 2
 
 solve :: Int -> Int
 solve n = sum' 3 n + sum' 5 n - sum' 15 n
-
-main :: IO ()
-main = do
-  x <- getCurrentTime
-  print $ solve 1000
-  y <- getCurrentTime
-
-  putStr "time:"
-  print $ diffUTCTime y x

@@ -1,5 +1,4 @@
 module Problem.P009 where
-import Data.Time
 
 {-
 - Special Pythagorean triplet
@@ -83,12 +82,3 @@ solve :: Int -> Int
 solve n = case findSpecialPythagoreanTriprets n of
                [] -> 0
                ((a, b, c):_) -> a * b * c
-
-main :: IO ()
-main = do
-  x <- getCurrentTime
-  print $ solve 1000
-  y <- getCurrentTime
-
-  putStr "time:"
-  print $ diffUTCTime y x

@@ -1,5 +1,4 @@
 module Problem.P003 where
-import Data.Time
 import Common.Arithmetic
 
 {-
@@ -18,12 +17,3 @@ import Common.Arithmetic
 
 solve :: Integer -> Integer
 solve = last . primeFactors
-
-main :: IO ()
-main = do
-  x <- getCurrentTime
-  print $ solve 600851475143
-  y <- getCurrentTime
-
-  putStr "time:"
-  print $ diffUTCTime y x

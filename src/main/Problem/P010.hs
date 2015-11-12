@@ -1,5 +1,4 @@
 module Problem.P010 where
-import Data.Time
 
 {-
 - Summation of primes
@@ -36,12 +35,3 @@ sieve n | n < 2 = []
 
 solve :: Int -> Integer
 solve = sum . map toInteger . sieve
-
-main :: IO ()
-main = do
-  x <- getCurrentTime
-  print $ solve 2000000
-  y <- getCurrentTime
-
-  putStr "time:"
-  print $ diffUTCTime y x

@@ -1,7 +1,7 @@
 module Problem.P004Spec (main, spec) where
 
 import Test.Hspec
-import Problem.P004 hiding (main)
+import Problem.P004
 
 main :: IO ()
 main = hspec spec

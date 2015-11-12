@@ -1,5 +1,4 @@
 module Problem.P005 where
-import Data.Time
 
 {-
 - Smallest multiple
@@ -18,12 +17,3 @@ import Data.Time
 solve :: Integer -> Integer -> Integer
 solve m n | m > n = 0
           | otherwise = foldr (lcm) 1 [m .. n]
-
-main :: IO ()
-main = do
-  x <- getCurrentTime
-  print $ solve 1 20
-  y <- getCurrentTime
-
-  putStr "time:"
-  print $ diffUTCTime y x

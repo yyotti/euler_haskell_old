@@ -1,5 +1,4 @@
 module Problem.P004 where
-import Data.Time
 
 {-
 - Largest palindrome product
@@ -46,12 +45,3 @@ isPalindrome x = show x == reverse (show x)
 
 solve :: (Integral a, Show a) => a -> a
 solve n = maximum $ filter isPalindrome $ products n
-
-main :: IO ()
-main = do
-  x <- getCurrentTime
-  print $ solve (3 :: Int)
-  y <- getCurrentTime
-
-  putStr "time:"
-  print $ diffUTCTime y x

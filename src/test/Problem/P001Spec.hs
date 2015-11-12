@@ -2,7 +2,7 @@ module Problem.P001Spec (main, spec) where
 
 import Test.Hspec
 import Test.QuickCheck
-import Problem.P001 hiding (main)
+import Problem.P001
 
 main :: IO ()
 main = hspec spec

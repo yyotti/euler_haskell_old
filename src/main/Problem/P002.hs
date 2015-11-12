@@ -1,5 +1,4 @@
 module Problem.P002 where
-import Data.Time
 import Common.Arithmetic
 
 {-
@@ -35,12 +34,3 @@ fib' = tail fib
 
 solve :: Int -> Integer
 solve n = sum $ filter even $ takeWhile ((<= n) . fromIntegral) fib'
-
-main :: IO ()
-main = do
-  x <- getCurrentTime
-  print $ solve 4000000
-  y <- getCurrentTime
-
-  putStr "time:"
-  print $ diffUTCTime y x

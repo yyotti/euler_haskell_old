@@ -1,5 +1,4 @@
 module Problem.P006 where
-import Data.Time
 
 {-
 - Sum square difference
@@ -45,12 +44,3 @@ import Data.Time
 
 solve :: Integer -> Integer
 solve n = n * (n - 1) * (n + 1) * (3 * n + 2) `div` 12
-
-main :: IO ()
-main = do
-  x <- getCurrentTime
-  print $ solve 100
-  y <- getCurrentTime
-
-  putStr "time:"
-  print $ diffUTCTime y x

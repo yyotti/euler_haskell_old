@@ -12,7 +12,7 @@ import Common.Arithmetic
 -
 - [結果]
 - 104743
-- time:0.916264s
+- time:0.04074s
 -}
 solve :: Int -> Integer
 solve n = primes !! (n - 1)

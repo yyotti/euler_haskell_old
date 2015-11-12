@@ -3,11 +3,19 @@ module Problem.P001 where
 {-
 - Multiples of 3 and 5
 - https://projecteuler.net/problem=1
--
-- [方針1] -> time:0.001429s
+-}
+
+{-
+- [方針1]
 - 普通にfilterして和をとる
 -
-- [方針2] -> time:0.000161s
+- [結果]
+- 233168
+- time:0.000043s
+-}
+
+{-
+- [方針2]
 - 3の倍数である自然数の数列をa(n)、5の倍数である自然数の数列をb(n)とすると、
 -   a(n) = 3n
 -   b(n) = 5n
@@ -37,9 +45,13 @@ module Problem.P001 where
 - となる。よってSは
 -   S = S'(3, n) + S'(5, n) - S(15, n)
 - でよい。
+-
+- [結果]
+- 233168
+- time:0.000017s
 -}
 
-sum' :: Int -> Int -> Int
+sum' :: Integral a => a -> a -> a
 sum' a n = a * m * (m + 1) `div` 2
   where m = (n - 1) `div` a
 

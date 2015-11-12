@@ -6,15 +6,15 @@ import Data.List
 fib :: Integral a => [a]
 fib = 0 : 1 : (zipWith (+) fib $ tail fib)
 
-primes :: [Integer]
+primes :: Integral a => [a]
 primes = 2 : filter isPrime [3, 5 ..]
 
-isPrime :: Integer -> Bool
+isPrime :: Integral a => a -> Bool
 isPrime n | n < 2 = False
           | otherwise = all ((/= 0) . mod n) $ ps
   where ps = takeWhile ((<= n) . (^2)) primes
 
-primeFactors :: Integer -> [Integer]
+primeFactors :: Integral a => a -> [a]
 primeFactors n | n < 2 = []
                | otherwise = case find ((== 0) . mod n) ps of
                                   Just p -> p : (primeFactors $ n `div` p)

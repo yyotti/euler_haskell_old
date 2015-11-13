@@ -1,5 +1,4 @@
 module Problem.P014 where
-import Prelude
 import Data.Ord
 import Data.Map as Map hiding (foldl')
 import Data.List hiding (insert)

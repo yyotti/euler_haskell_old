@@ -58,16 +58,48 @@ import Common.Arithmetic
 - time:0.604879s
 -}
 
-triangleNumbers :: Integral a => [(a, a)]
-triangleNumbers = map (\ n -> (t (fromIntegral n), m (fromIntegral n))) [1..]
-  where t n = n * (n + 1) `div` 2
-        m n | even n = factorsCount (n `div` 2) * factorsCount (n + 1)
-            | otherwise = factorsCount n * factorsCount ((n + 1) `div` 2)
+{-
+- [方針3]
+- m(t(n))をn=1から順に書き並べていくと、
+-   m(t(1)) = m(1*1) = m(1) * m(1) = 1
+-   m(t(2)) = m(1*3) = m(1) * m(3) = 2
+-   m(t(3)) = m(3*2) = m(3) * m(2) = 4
+-   m(t(4)) = m(2*5) = m(2) * m(5) = 4
+-   m(t(5)) = m(5*3) = m(5) * m(3) = 4
+-   m(t(6)) = m(3*7) = m(3) * m(7) = 4
+-   m(t(7)) = m(7*4) = m(7) * m(4) = 6
+- と続いていくが、分解された積の片方は1つ前の結果が使える。
+- 1つ前の結果 m' を持ち回って計算しようとすると、
+-   m(t(1)) = m(1*1) = m(1) * m' = 1   (m'の初期値は1としておく)
+-   m(t(2)) = m(1*3) = m' * m(3) = 2, m' = m(3) <- 次のm'として控える
+-   m(t(3)) = m(3*2) = m' * m(2) = 4, m' = m(2)
+-   m(t(4)) = m(2*5) = m' * m(5) = 4, m' = m(5)
+-   m(t(5)) = m(5*3) = m' * m(3) = 4, m' = m(3)
+-   m(t(5)) = m(5*3) = m' * m(3) = 4, m' = m(3)
+-   m(t(6)) = m(3*7) = m' * m(7) = 4, m' = m(7)
+-   m(t(7)) = m(7*4) = m' * m(4) = 6, m' = m(4)
+-
+- つまり、
+-   nが偶数のとき・・・m' * m(n + 1)
+-   nが奇数のとき・・・m' * m((n + 1)/2)
+- となる。
+- これはt(n)からではなくnからt(n)の約数の個数が出せるということなので、先にm(t(n))が500を
+- 超えるnを特定し、最後にt(n)を計算すればよい。
+-
+- [結果]
+- 76576500
+- time:0.305426s
+-}
 
 factorsCount :: Integral a => a -> a
-factorsCount n = product $ map ((+ 1) . fromIntegral . length) $ groupBy (==) $ primeFactors n
+factorsCount = product . map ((+ 1) . fromIntegral . length) . groupBy (==) . primeFactors
+
+factorsCounts :: Integral a => [a]
+factorsCounts = map fst $ scanl mt (1, 1) [1..]
+  where mt (_, m') n | even n = let m'' = factorsCount (n + 1) in (m' * m'', m'')
+                     | otherwise = let m'' = factorsCount ((n + 1) `div` 2) in (m' * m'', m'')
 
 solve :: Integral a => a -> Integer
-solve n = case find ((> n) . snd) triangleNumbers of
-               Just (t, _) -> toInteger t
+solve n = case findIndex (> n) factorsCounts of
+               Just i -> toInteger $ i * (i + 1) `div` 2
                _ -> 0

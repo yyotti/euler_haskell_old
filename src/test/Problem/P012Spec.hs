@@ -8,9 +8,6 @@ main = hspec spec
 
 spec :: Spec
 spec = do
-  describe "triangleNumbers" $ do
-    it "first 10 terms are [(1,1),(3,2),(6,4),(10,4),(15,4),(21,4),(28,6),(36,9),(45,6),(55,4)]" $ do
-      take 10 triangleNumbers `shouldBe` [(1, 1), (3, 2), (6, 4), (10, 4), (15, 4), (21, 4), (28, 6), (36, 9), (45, 6), (55, 4)]
 
   describe "factorsCount" $ do
     it "returns 1 when n = 1" $ do
@@ -37,6 +34,10 @@ spec = do
       factorsCount 15 `shouldBe` 4
     it "returns 6 when n = 28" $ do
       factorsCount 28 `shouldBe` 6
+
+  describe "factorsCounts" $ do
+    it "first 10 terms are [1,1,2,4,4,4,4,6,9,6]" $ do
+      take 10 factorsCounts `shouldBe` [1, 1, 2, 4, 4, 4, 4, 6, 9, 6]
 
   describe "solve" $ do
     it "returns 28 when n = 5" $ do

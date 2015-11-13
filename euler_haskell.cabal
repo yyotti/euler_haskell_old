@@ -24,6 +24,7 @@ executable euler_haskell
   build-depends:
       base ==4.6.*
     , time ==1.4.*
+    , containers
 
 test-suite spec
   type:
@@ -40,3 +41,4 @@ test-suite spec
       base    == 4.*
     , hspec   == 2.2.*
     , QuickCheck == 2.6.*
+    , containers

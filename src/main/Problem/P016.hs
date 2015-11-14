@@ -1,4 +1,5 @@
 module Problem.P016 where
+import Common.Util
 
 {-
 - Power digit sum
@@ -7,8 +8,11 @@ module Problem.P016 where
 
 {-
 - [方針1]
+- n^e を計算し、各桁の和を求める
 -
 - [結果]
+- 1366
+- time:0.000298s
 -}
 solve :: Integral a => a -> a -> Integer
-solve _ _ = undefined
+solve = (sum .) . (digits .) . (^) . fromIntegral

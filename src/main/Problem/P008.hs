@@ -1,4 +1,5 @@
 module Problem.P008 where
+import Common.Util
 
 {-
 - Largest product in a series
@@ -39,11 +40,6 @@ module Problem.P008 where
 - 23514624000
 - time:0.002147s
 -}
-digits :: Integral a => a -> [a]
-digits n | n < 0 = []
-         | otherwise = digits' n []
-  where digits' k ls | k < 10 = k : ls
-                     | otherwise = digits' (k `div` 10) $ (k `mod` 10) : ls
 
 findLargestProduct :: Integral a => Int -> [a] -> a
 findLargestProduct _ [] = 0

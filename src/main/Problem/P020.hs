@@ -1,4 +1,6 @@
 module Problem.P020 where
+import Common.Arithmetic
+import Common.Util
 
 {-
 - Factorial digit sum
@@ -7,8 +9,11 @@ module Problem.P020 where
 
 {-
 - [方針1]
+- 素直にやるしかない気がするが
 -
 - [結果]
+- 648
+- time:0.000205s
 -}
 solve :: Integral a => a -> Integer
-solve _ = undefined
+solve n = toInteger $ sum $ digits $ fact n

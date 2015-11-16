@@ -1,6 +1,6 @@
 module Problem.P021 where
-import Data.List
-import Common.Arithmetic
+import Data.List as List
+import Data.Map as Map
 
 {-
 - Amicable numbers
@@ -24,21 +24,39 @@ import Common.Arithmetic
 - [結果]
 - 31626
 - time:0.418841s
+-
+- [コミット]
+- 3f57693
 -}
 
-primeFactorsCount :: Integral a => a -> [(a, Int)]
-primeFactorsCount = map toTuple . group . primeFactors
-  where toTuple ls = (head ls, length ls)
+{-
+- [方針2]
+- 素因数分解ではなくエラトステネスの篩の要領で約数の和を求める。
+- 1からnまでのリストを作り、それぞれの要素を(i,0)としておく。
+- 先頭から順に要素を辿り、自分自身の倍数に対して自分の値を加算していく。
+- つまり
+-   1・・・2以上の全ての要素に1を加える
+-   2・・・3以上の2の倍数に2を加える
+-   3・・・4以上の3の倍数に3を加える
+- と繰り返していく。(自分自身を含めてしまうと友愛数ができない)
+-
+- あとはリストの中から友愛数となるペアを抽出して和をとればよい。
+-
+- [結果]
+- 31626
+- time:0.099711s
+-}
 
-factorsSum :: Integral a => a -> a
-factorsSum = product . map s . primeFactorsCount
-  where s (p, e) = sum $ map (p^) [0..e]
+sieveLike :: Integral a => a -> Map a a
+sieveLike n = List.foldl' add m [1..n]
+  where m = fromList $ List.map (\ i -> (i, 0)) [1..n]
+        add m i = List.foldl' (\ m k -> insertWith (+) (i * k) i m) m [2..n `div` i]
 
-amicableNum :: Integral a => a -> a -> [a]
-amicableNum m n | d2 == n && d1 < m && d1 /= n = [n, d1]
-                | otherwise = []
-  where d1 = factorsSum n - n
-        d2 = factorsSum d1 - d1
+filterAmicableNumbers :: Integral a => a -> Map a a -> [a]
+filterAmicableNumbers n m = foldlWithKey' addAmicableNumber [] m
+  where addAmicableNumber ls i s | i < s && s <= n && findWithDefault 0 s m == i = i : s : ls
+                                 | otherwise = ls
 
-solve :: Integral a => a -> Integer
-solve n = toInteger $ (sum . concatMap (amicableNum n)) [1..n-1] `div` 2
+solve :: (Integral a, Show a) => a -> Integer
+solve n = toInteger $ sum $ filterAmicableNumbers m $ sieveLike m
+  where m = n - 1

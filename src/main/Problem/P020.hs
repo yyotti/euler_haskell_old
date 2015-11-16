@@ -16,4 +16,4 @@ import Common.Util
 - time:0.000205s
 -}
 solve :: Integral a => a -> Integer
-solve n = toInteger $ sum $ digits $ fact n
+solve = toInteger . sum . digits . fact

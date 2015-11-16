@@ -11,5 +11,5 @@ spec = do
   describe "solve" $ do
     it "returns 27 when n = 10" $ do
       solve 10 `shouldBe` 27
-    it "returns 30 when n = 20" $ do
-      solve 20 `shouldBe` 30
+    it "returns 54 when n = 20" $ do
+      solve 20 `shouldBe` 54

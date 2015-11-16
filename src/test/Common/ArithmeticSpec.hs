@@ -63,3 +63,17 @@ spec = do
       primeFactors 10 `shouldBe` [2, 5]
     it "returns [11] when n = 11" $ do
       primeFactors 11 `shouldBe` [11]
+
+  describe "fact" $ do
+    it "returns 0 when n = -1" $ do
+      fact (-1) `shouldBe` 0
+    it "returns 1 when n = 0" $ do
+      fact 0 `shouldBe` 1
+    it "returns 1 when n = 1" $ do
+      fact 1 `shouldBe` 1
+    it "returns 2 when n = 2" $ do
+      fact 2 `shouldBe` 2
+    it "returns 6 when n = 3" $ do
+      fact 3 `shouldBe` 6
+    it "returns 24 when n = 4" $ do
+      fact 4 `shouldBe` 24

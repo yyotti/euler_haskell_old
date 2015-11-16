@@ -8,18 +8,6 @@ main = hspec spec
 
 spec :: Spec
 spec = do
-  describe "fact" $ do
-    it "returns 1 when n = 0" $ do
-      fact 0 `shouldBe` 1
-    it "returns 1 when n = 1" $ do
-      fact 1 `shouldBe` 1
-    it "returns 2 when n = 2" $ do
-      fact 2 `shouldBe` 2
-    it "returns 6 when n = 3" $ do
-      fact 3 `shouldBe` 6
-    it "returns 24 when n = 4" $ do
-      fact 4 `shouldBe` 24
-
   describe "permutation" $ do
     it "returns 1 when n < r" $ do
       permutation 2 3 `shouldBe` 1

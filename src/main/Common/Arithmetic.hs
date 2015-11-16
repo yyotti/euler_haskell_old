@@ -26,3 +26,8 @@ primeFactors n | n < 2 = []
                                   Just p -> p : (primeFactors $ n `div` p)
                                   Nothing -> [n]
   where ps = takeWhile ((<= n) . (^2)) primes
+
+fact :: Integral a => a -> a
+fact 0 = 1
+fact n | n < 0 = 0
+       | otherwise = n * fact (n - 1)

@@ -1,4 +1,5 @@
 module Problem.P015 where
+import Common.Arithmetic
 
 {-
 - Lattice paths
@@ -23,10 +24,6 @@ module Problem.P015 where
 - 137846528820
 - time:0.000078s
 -}
-
-fact :: Integral a => a -> a
-fact 0 = 1
-fact n = n * fact (n - 1)
 
 permutation :: Integral a => a -> a -> a
 permutation _ 0 = 1

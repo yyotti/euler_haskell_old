@@ -97,7 +97,7 @@ problems =
     return $ P019.solve,
     return $ P020.solve 100,
     return $ P021.solve 10000,
-    return $ P022.solve "src/main/resources/p022_names.txt"
+    P022.solve "src/main/resources/p022_names.txt"
     ]
 
 main :: IO ()

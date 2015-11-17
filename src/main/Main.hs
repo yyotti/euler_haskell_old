@@ -72,32 +72,32 @@ p018triangle =
     [ 4, 62, 98, 27, 23,  9, 70, 98, 73, 93, 38, 53, 60,  4, 23]
     ]
 
-problems :: [Integer]
+problems :: [IO Integer]
 problems =
   [
-    0, -- dummy for sliding index
-    P001.solve 1000,
-    P002.solve 4000000,
-    P003.solve 600851475143,
-    P004.solve (3 :: Int),
-    P005.solve 1 20,
-    P006.solve 100,
-    P007.solve 10001,
-    P008.solve 13 p008Num,
-    P009.solve 1000,
-    P010.solve 2000000,
-    P011.solve 4 p011grid,
-    P012.solve 500,
-    P013.solve,
-    P014.solve 1000000,
-    P015.solve 20,
-    P016.solve 2 1000,
-    0, -- P017 is pending
-    P018.solve p018triangle,
-    P019.solve,
-    P020.solve 100,
-    P021.solve 10000,
-    P022.solve "src/main/resources/p022_names.txt"
+    return 0, -- dummy for sliding index
+    return $ P001.solve 1000,
+    return $ P002.solve 4000000,
+    return $ P003.solve 600851475143,
+    return $ P004.solve (3 :: Int),
+    return $ P005.solve 1 20,
+    return $ P006.solve 100,
+    return $ P007.solve 10001,
+    return $ P008.solve 13 p008Num,
+    return $ P009.solve 1000,
+    return $ P010.solve 2000000,
+    return $ P011.solve 4 p011grid,
+    return $ P012.solve 500,
+    return $ P013.solve,
+    return $ P014.solve 1000000,
+    return $ P015.solve 20,
+    return $ P016.solve 2 1000,
+    return $ 0, -- P017 is pending
+    return $ P018.solve p018triangle,
+    return $ P019.solve,
+    return $ P020.solve 100,
+    return $ P021.solve 10000,
+    return $ P022.solve "src/main/resources/p022_names.txt"
     ]
 
 main :: IO ()
@@ -111,7 +111,7 @@ time :: Int -> IO()
 time i = do
   _ <- printf "P%03d\n" i
   x <- getCurrentTime
-  print $ problems !! i
+  print =<< problems !! i
   y <- getCurrentTime
 
   putStr "time:"
@@ -124,4 +124,4 @@ printOne n | n < 1 || n >= length problems = putStrLn $ "problem number out of r
 printAll :: IO ()
 printAll = do
   let withIdx = zip [(0 :: Int)..] problems
-  mapM_ (\ (i, a) -> printf "P%03d: %d\n" i a) $ tail withIdx
+  mapM_ (\ (i, a) -> do ans <- a;  printf "P%03d: %d\n" i ans) $ tail withIdx

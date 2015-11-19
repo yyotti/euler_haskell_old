@@ -15,7 +15,7 @@ spec = do
       primesCount (-79) 1601 `shouldBe` 80
 
   describe "solve" $ do
-    it "returns 41 when m = 50" $ do
+    it "returns -235 when m = 50" $ do
       solve 50 `shouldBe` -235
-    it "returns 41 when m = 100" $ do
+    it "returns -1455 when m = 100" $ do
       solve 100 `shouldBe` -1455

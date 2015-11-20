@@ -1,4 +1,6 @@
 module Problem.P029 where
+import Data.List as L
+import Data.Set as S
 
 {-
 - Distinct powers
@@ -7,8 +9,12 @@ module Problem.P029 where
 
 {-
 - [方針1]
+- 全てのパターンを計算して重複を排除する
 -
 - [結果]
+- 9183
+- time:0.020457s
 -}
 solve :: Int -> Integer
-solve _ = undefined
+solve n = toInteger $ size $ L.foldl' (\ set [x, y] -> S.insert ((toInteger x)^y) set) empty ns
+  where ns = sequence [[2..n], [2..n]]

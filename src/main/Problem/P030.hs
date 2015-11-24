@@ -43,9 +43,9 @@ findMax :: Integral a => a -> Int
 findMax n = length $ takeWhile (\ i -> i * 9^n >= 10^(i - 1)) [1..]
 
 findDigitPowers :: Integral a => a -> [a]
-findDigitPowers n = filter (\ i -> digitSum i == i) [10..10^k - 1]
+findDigitPowers n = filter (\ i -> digitSum i == toInteger i) [10..10^k - 1]
   where k = findMax n
-        digitSum = sum . map (^n) . digits
+        digitSum = sum . map ((^n) . toInteger) . digits
 
 solve :: Int -> Integer
 solve = toInteger . sum . findDigitPowers

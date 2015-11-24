@@ -15,4 +15,4 @@ import Common.Util
 - time:0.000298s
 -}
 solve :: Integral a => a -> a -> Integer
-solve = (sum .) . (digits .) . (^) . fromIntegral
+solve = (toInteger .) . (sum .) . (digits .) . (^) . fromIntegral

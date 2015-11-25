@@ -20,3 +20,18 @@ spec = do
     it "returns [1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0] when n = 123456789012345678901234567890" $ do
       digits 123456789012345678901234567890 `shouldBe` [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
 
+  describe "isPalindrome" $ do
+    it "returns True when x = \"\"" $ do
+      isPalindrome "" `shouldBe` True
+    it "returns True when x = \"a\"" $ do
+      isPalindrome "a" `shouldBe` True
+    it "returns False when x = \"ab\"" $ do
+      isPalindrome "ab" `shouldBe` False
+    it "returns True when x = \"aa\"" $ do
+      isPalindrome "aa" `shouldBe` True
+    it "returns True when x = \"aca\"" $ do
+      isPalindrome "aca" `shouldBe` True
+    it "returns False when x = \"aac\"" $ do
+      isPalindrome "aac" `shouldBe` False
+    it "returns True when x = [0,1,2,3,2,1,0]" $ do
+      isPalindrome [0, 1, 2, 3, 2, 1, 0] `shouldBe` True

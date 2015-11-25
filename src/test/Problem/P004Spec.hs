@@ -26,32 +26,6 @@ spec = do
     it "returns 810 elements when n = 2" $ do
       length (products 2) `shouldBe` 810
 
-  describe "isPalindrome" $ do
-    it "returns True when x = \"\"" $ do
-      isPalindrome "" `shouldBe` True
-    it "returns True when x = \"a\"" $ do
-      isPalindrome "a" `shouldBe` True
-    it "returns False when x = \"ab\"" $ do
-      isPalindrome "ab" `shouldBe` False
-    it "returns True when x = \"aa\"" $ do
-      isPalindrome "aa" `shouldBe` True
-    it "returns True when x = \"aca\"" $ do
-      isPalindrome "aca" `shouldBe` True
-    it "returns False when x = \"aac\"" $ do
-      isPalindrome "aac" `shouldBe` False
-    it "returns True when x = 0" $ do
-      isPalindrome 0 `shouldBe` True
-    it "returns False when x = 10" $ do
-      isPalindrome 10 `shouldBe` False
-    it "returns True when x = 11" $ do
-      isPalindrome 11 `shouldBe` True
-    it "returns False when x = 122" $ do
-      isPalindrome 122 `shouldBe` False
-    it "returns True when x = 121" $ do
-      isPalindrome 121 `shouldBe` True
-    it "returns True when x = 1234321" $ do
-      isPalindrome 1234321 `shouldBe` True
-
   describe "solve" $ do
     it "returns 9 when n = 1" $ do
       solve 1 `shouldBe` 9

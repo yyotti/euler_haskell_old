@@ -1,4 +1,5 @@
 module Problem.P004 where
+import Common.Util
 
 {-
 - Largest palindrome product
@@ -40,8 +41,5 @@ products n | n < 1 = []
         nums2 | n == 1 = nums1
               | otherwise = filter ((== 0) . (`mod` 11)) nums1
 
-isPalindrome :: (Show a) => a -> Bool
-isPalindrome x = show x == reverse (show x)
-
 solve :: (Integral a, Show a) => a -> Integer
-solve n = toInteger $ maximum $ filter isPalindrome $ products n
+solve n = toInteger $ maximum $ filter (isPalindrome . show) $ products n

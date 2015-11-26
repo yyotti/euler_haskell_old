@@ -127,7 +127,7 @@ problems =
     return $ P034.solve,
     return $ P035.solve 1000000,
     return $ P036.solve 1000000,
-    return $ P037.solve 11
+    return $ P037.solve
     ]
 
 main :: IO ()

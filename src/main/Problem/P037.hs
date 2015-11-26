@@ -17,26 +17,45 @@ import Common.Arithmetic
 - [結果]
 - 748317
 - time:0.811496s
+-
+- [コミット]
+- f8db587
 -}
 
-trimr :: Integral a => a -> a
-trimr = flip div 10
+{-
+- [方針2]
+- 11個と決め打つのは気持悪いので、全てを生成する方向でやる。
+-
+- 下記の手順で全ての切り詰め素数を生成することができる。
+- 1. 1桁の素数を列挙する。これをPSとする。
+- 2. LPS = PS, RPS = PSとする。
+- 3. LPSに含まれる数の左に1～9の数字をそれぞれ付加した数を生成し、そこから
+-    素数を抽出する。抽出した数をあらためてLPSとする。
+- 4. RPSに含まれる数の右に1～9の数字をそれぞれ付加した数を生成し、そこから
+-    素数を抽出する。抽出した数をあらためてRTSとする。
+- 5. LPS、RTSの少なくとも一方が空になれば、全ての切り詰め可能素数が列挙された。
+- 6. LPSとRPSの共通部分をとり、切り詰め可能素数の列に追加する。手順3に戻り、
+-    次に大きい桁の切り詰め可能素数を列挙していく手順を繰り返す。
+-
+- [結果]
+- 748317
+- time:0.055739s
+-}
 
-triml :: Integral a => a -> a
--- triml n = n `mod` 10^e
---   where e = (length $ digits n) - 1
--- ↑をポイントフリーで書くと↓になるが、やりすぎか？
-triml = ap (flip mod . (10^) . e) id
-  where e = flip (-) 1 . length . digits
+addLeft :: Integral a => a -> a -> a
+-- addLeft n d = n + d * (e n)
+-- ↑をポイントフリーで書くと↓になるが、やりぎすに思えてしょうがない
+addLeft = ap ((.) . (+)) ((*) . e)
+  where e = (10^) . length . digits
 
-truncates :: Integral a => a -> [a]
-truncates = nub . ap ((++) . rs) ls
-  where rs = takeWhile (> 0) . iterate trimr
-        ls = takeWhile (> 0) . iterate triml
+addRight :: Integral a => a -> a -> a
+addRight = (+) . (10 *)
 
-isTruncatablePrime :: Integral a => a -> Bool
-isTruncatablePrime = ap ((&&) . (>= 10)) (all isPrime . truncates)
-
-solve :: Int -> Integer
-solve = toInteger . sum . flip take truncatablePrimes . min 11
-  where truncatablePrimes = filter isTruncatablePrime primes
+solve :: Integer
+solve = toInteger $ sum $ tps ps ps
+  where ps = takeWhile (< 10) primes
+        tps [] _ = []
+        tps _ [] = []
+        tps lps rps = intersect nextL nextR ++ tps nextL nextR
+          where nextL = filter isPrime $ concatMap (flip map [1..9] . addLeft) lps
+                nextR = filter isPrime $ concatMap (flip map [1..9] . addRight) rps

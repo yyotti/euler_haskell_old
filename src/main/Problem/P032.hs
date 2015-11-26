@@ -1,5 +1,6 @@
 module Problem.P032 where
 import Data.List
+import Common.Util
 
 {-
 - Pandigital products
@@ -35,4 +36,3 @@ solve = (sum . nub . map head . filter isPandigital . concatMap numPairs) [[1, 4
   where
     numPairs ls = map (\ [a, b] -> [a * b, a, b]) $ sequence $ map range ls
     range n = [10^(n-1) .. 10^n-1]
-    isPandigital = (== "123456789") . sort . foldr ((++) . show) []

@@ -35,3 +35,13 @@ spec = do
       isPalindrome "aac" `shouldBe` False
     it "returns True when x = [0,1,2,3,2,1,0]" $ do
       isPalindrome [0, 1, 2, 3, 2, 1, 0] `shouldBe` True
+
+  describe "isPandigital" $ do
+    it "returns True when x = [123456789]" $ do
+      isPandigital [123456789] `shouldBe` True
+    it "returns True when x = [135792468]" $ do
+      isPandigital [135792468] `shouldBe` True
+    it "returns False when x = [13792468]" $ do
+      isPandigital [13792468] `shouldBe` False
+    it "returns True when x = [135,7,92,468]" $ do
+      isPandigital [135, 7, 92, 468] `shouldBe` True

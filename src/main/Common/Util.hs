@@ -1,5 +1,6 @@
 module Common.Util where
 import Control.Monad
+import Data.List
 
 digits :: Integral a => a -> [Int]
 digits n | n < 0 = []
@@ -9,3 +10,6 @@ digits n | n < 0 = []
 
 isPalindrome :: (Eq a) => [a] -> Bool
 isPalindrome = ap (==) reverse
+
+isPandigital :: (Integral a, Show a) => [a] -> Bool
+isPandigital = (== "123456789") . sort . foldr ((++) . show) []

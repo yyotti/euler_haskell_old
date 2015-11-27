@@ -1,6 +1,7 @@
 module Problem.P024 where
 import Data.List
 import Common.Arithmetic
+import Common.Util
 
 {-
 - Lexicographic permutations
@@ -59,4 +60,3 @@ permutation ls i = h : (permutation rs (i `mod` f))
 
 solve :: Integral a => [a] -> Int -> Integer
 solve ns i = toInteger $ toNum $ permutation ns (i - 1)
-  where toNum = foldl' (\ n k -> n * 10 + k) 0

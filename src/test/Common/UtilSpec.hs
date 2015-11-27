@@ -55,3 +55,15 @@ spec = do
       splitByComma "COLIN" `shouldBe` ["COLIN"]
     it "returns [\"ABC\",\"DEFGHIJ\",\"KLMNO\",\"PQRST\",\"U\",\"VW\",\"XYZ\"] when str = \"ABC,DEFGHIJ,KLMNO,PQRST,U,VW,XYZ\"" $ do
       splitByComma "ABC,DEFGHIJ,KLMNO,PQRST,U,VW,XYZ" `shouldBe` ["ABC", "DEFGHIJ", "KLMNO", "PQRST", "U", "VW", "XYZ"]
+
+  describe "toNum" $ do
+    it "returns 0 when ls = []" $ do
+      toNum [] `shouldBe` 0
+    it "returns 0 when ls = [0]" $ do
+      toNum [0] `shouldBe` 0
+    it "returns 1 when n = [1]" $ do
+      toNum [1] `shouldBe` 1
+    it "returns 10 when n = [1,0]" $ do
+      toNum [1, 0] `shouldBe` 10
+    it "returns 123456789012345678901234567890 when n = [1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0]" $ do
+      toNum [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0] `shouldBe` 123456789012345678901234567890

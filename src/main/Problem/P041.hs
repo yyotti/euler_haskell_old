@@ -1,6 +1,7 @@
 module Problem.P041 where
 import Common.Arithmetic
 import Data.List
+import Common.Util
 
 {-
 - Pandigital prime
@@ -51,7 +52,6 @@ import Data.List
 
 permNums :: Integral a => a -> [a]
 permNums n = (map toNum . permutations) [1..n]
-  where toNum = foldl' ((+) . (* 10)) 0
 
 solve :: Integer
 solve = (toInteger . maximum . filter isPrime . concatMap permNums) [4, 7]

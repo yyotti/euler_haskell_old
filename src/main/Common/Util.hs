@@ -20,3 +20,6 @@ splitByComma str = h : splitByComma t
   where (h, t) = case span (/= ',') str of
                       (h', (',':s)) -> (h', s)
                       (h', t') -> (h', t')
+
+toNum :: Integral a => [a] -> a
+toNum = foldl' ((+) . (* 10)) 0

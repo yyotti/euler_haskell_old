@@ -8,16 +8,6 @@ main = hspec spec
 
 spec :: Spec
 spec = do
-  describe "isPythagoreanTriples" $ do
-    it "returns False when (a,b,c) = (1,2,3)" $ do
-      isPythagoreanTriples 1 2 3 `shouldBe` False
-    it "returns True when (a,b,c) = (3,4,5)" $ do
-      isPythagoreanTriples 3 4 5 `shouldBe` True
-    it "returns True when (a,b,c) = (5,12,13)" $ do
-      isPythagoreanTriples 5 12 13 `shouldBe` True
-    it "returns True when (a,b,c) = (6,8,10)" $ do
-      isPythagoreanTriples 6 8 10 `shouldBe` True
-
   describe "pythatoreanTripletCount" $ do
     it "returns 0 when p = 1" $ do
       pythatoreanTripletCount 1 `shouldBe` 0

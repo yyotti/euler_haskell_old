@@ -8,6 +8,10 @@ main = hspec spec
 
 spec :: Spec
 spec = do
+  describe "champernownes" $ do
+    it "first 20 terms are [0,1,2,3,4,5,6,7,8,9,1,0,1,1,1,2,1,3,1,4]" $ do
+      take 20 champernownes `shouldBe` [0,1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 0, 1, 1, 1, 2, 1, 3, 1, 4]
+
   describe "solve" $ do
     it "returns 1 when ls = [1]" $ do
       solve [1] `shouldBe` 1

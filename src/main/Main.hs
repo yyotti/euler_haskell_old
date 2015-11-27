@@ -137,7 +137,8 @@ problems =
     return $ P039.solve 1000,
     return $ P040.solve [1, 10, 100, 1000, 10000, 100000, 1000000],
     return $ P041.solve,
-    P042.solve "src/main/resources/p042_words.txt"
+    P042.solve "src/main/resources/p042_words.txt",
+    P043.solve
     ]
 
 main :: IO ()

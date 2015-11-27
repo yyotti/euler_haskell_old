@@ -13,3 +13,10 @@ isPalindrome = ap (==) reverse
 
 isPandigital :: (Integral a, Show a) => [a] -> Bool
 isPandigital = (== "123456789") . sort . foldr ((++) . show) []
+
+splitByComma :: String -> [String]
+splitByComma "" = []
+splitByComma str = h : splitByComma t
+  where (h, t) = case span (/= ',') str of
+                      (h', (',':s)) -> (h', s)
+                      (h', t') -> (h', t')

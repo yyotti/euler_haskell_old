@@ -26,16 +26,6 @@ spec = do
     it "returns 1559 when ss = [\"ABC\",\"DEFGHIJ\",\"KLMNO\",\"PQRST\",\"U\",\"VW\",\"XYZ\"]" $ do
       sumNameScores ["ABC", "DEFGHIJ", "KLMNO", "PQRST", "U", "VW", "XYZ"] `shouldBe` 1559
 
-  describe "splitByComma" $ do
-    it "returns [] when str = \"\"" $ do
-      splitByComma "" `shouldBe` []
-    it "returns [\"A\"] when str = \"A\"" $ do
-      splitByComma "A" `shouldBe` ["A"]
-    it "returns [\"COLIN\"] when str = \"COLIN\"" $ do
-      splitByComma "COLIN" `shouldBe` ["COLIN"]
-    it "returns [\"ABC\",\"DEFGHIJ\",\"KLMNO\",\"PQRST\",\"U\",\"VW\",\"XYZ\"] when str = \"ABC,DEFGHIJ,KLMNO,PQRST,U,VW,XYZ\"" $ do
-      splitByComma "ABC,DEFGHIJ,KLMNO,PQRST,U,VW,XYZ" `shouldBe` ["ABC", "DEFGHIJ", "KLMNO", "PQRST", "U", "VW", "XYZ"]
-
   describe "readNames" $ do
     it "returns [\"COLIN\"] when str = \"src/test/resources/p022_1.txt\"" $ do
       names <- readNames "src/test/resources/p022_1.txt"

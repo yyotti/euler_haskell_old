@@ -45,3 +45,13 @@ spec = do
       isPandigital [13792468] `shouldBe` False
     it "returns True when x = [135,7,92,468]" $ do
       isPandigital [135, 7, 92, 468] `shouldBe` True
+
+  describe "splitByComma" $ do
+    it "returns [] when str = \"\"" $ do
+      splitByComma "" `shouldBe` []
+    it "returns [\"A\"] when str = \"A\"" $ do
+      splitByComma "A" `shouldBe` ["A"]
+    it "returns [\"COLIN\"] when str = \"COLIN\"" $ do
+      splitByComma "COLIN" `shouldBe` ["COLIN"]
+    it "returns [\"ABC\",\"DEFGHIJ\",\"KLMNO\",\"PQRST\",\"U\",\"VW\",\"XYZ\"] when str = \"ABC,DEFGHIJ,KLMNO,PQRST,U,VW,XYZ\"" $ do
+      splitByComma "ABC,DEFGHIJ,KLMNO,PQRST,U,VW,XYZ" `shouldBe` ["ABC", "DEFGHIJ", "KLMNO", "PQRST", "U", "VW", "XYZ"]

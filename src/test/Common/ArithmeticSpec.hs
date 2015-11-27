@@ -77,3 +77,7 @@ spec = do
       fact 3 `shouldBe` 6
     it "returns 24 when n = 4" $ do
       fact 4 `shouldBe` 24
+
+  describe "primitivePythagoreanMNs" $ do
+    it "first 10 terms are [(2,1),(3,2),(4,1),(4,3),(5,2),(5,4),(6,1),(6,5),(7,2),(7,4)]" $ do
+     take 10 primitivePythagoreanMNs `shouldBe` [(2, 1), (3, 2), (4, 1), (4, 3), (5, 2), (5, 4), (6, 1), (6, 5), (7, 2), (7, 4)]

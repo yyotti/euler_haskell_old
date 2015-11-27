@@ -31,3 +31,8 @@ fact :: Integral a => a -> a
 fact 0 = 1
 fact n | n < 0 = 0
        | otherwise = n * fact (n - 1)
+
+{-# SPECIALIZE primitivePythagoreanMNs :: [(Int, Int)] #-}
+{-# SPECIALIZE primitivePythagoreanMNs :: [(Integer, Integer)] #-}
+primitivePythagoreanMNs :: Integral a =>  [(a, a)]
+primitivePythagoreanMNs = concatMap (\ m -> map (\ n -> (m, n)) $ filter (\ n -> odd (m - n) && gcd m n == 1) [1..(m - 1)]) [1..]

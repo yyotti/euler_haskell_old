@@ -1,4 +1,5 @@
 module Problem.P009 where
+import Common.Arithmetic
 
 {-
 - Special Pythagorean triplet
@@ -67,9 +68,6 @@ module Problem.P009 where
 - 31875000
 - time:0.000042s
 -}
-
-primitivePythagoreanMNs :: Integral a =>  [(a, a)]
-primitivePythagoreanMNs = concatMap (\ m -> map (\ n -> (m, n)) $ filter (\ n -> odd (m - n) && gcd m n == 1) [1..(m - 1)]) [1..]
 
 findSpecialPythagoreanTriprets :: Integral a => a -> [(a, a, a)]
 findSpecialPythagoreanTriprets k | odd k = []

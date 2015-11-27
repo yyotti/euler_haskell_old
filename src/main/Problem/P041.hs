@@ -1,6 +1,5 @@
 module Problem.P041 where
 import Common.Arithmetic
-import Common.Util
 import Data.List
 
 {-
@@ -14,11 +13,45 @@ import Data.List
 -
 - [結果]
 - 時間がかかりすぎるので中断
+-
+- [コミット]
+- 9c78436
 -}
 
-isPandigitalN :: Integral a => a -> Bool
-isPandigitalN x = [1..length ds] == sort ds
-  where ds = digits x
+{-
+- [方針2]
+- n桁パンデジタル数は1からnまでの数字を1度ずつ使っている数のことである。
+- 1からnまでの和が3の倍数になる場合、元の数も3の倍数になるため、それは素数では
+- ないことになる。
+- いま、9桁以下の数を対象にしているため、
+-   n = 1 ・・・ 1から1までの和 = 1 (3の倍数ではない)
+-   n = 2 ・・・ 1から2までの和 = 3 (3の倍数)
+-   n = 3 ・・・ 1から3までの和 = 6 (3の倍数)
+-   n = 4 ・・・ 1から4までの和 = 10 (3の倍数ではない)
+-   n = 5 ・・・ 1から5までの和 = 15 (3の倍数)
+-   n = 6 ・・・ 1から6までの和 = 21 (3の倍数)
+-   n = 7 ・・・ 1から7までの和 = 28 (3の倍数ではない)
+-   n = 8 ・・・ 1から8までの和 = 36 (3の倍数)
+-   n = 9 ・・・ 1から9までの和 = 45 (3の倍数)
+- となる。n = 1の場合のパンデジタル数は1しかないが、1は素数ではないため
+- 除外してよい。
+- よって、4桁と7桁の素数のみを調べればよい。
+-
+- 単純に4桁と7桁の数から素数かつパンデジタル数を抽出してもよいが、
+- 逆にパンデジタル数を生成してからそれが素数か否かを判定する方が速い。
+-
+- 4桁のパンデジタル数・・・4! = 24個
+- 7桁のパンデジタル数・・・7! = 5040個
+- で、計5064個しかない。
+-
+- [結果]
+- 7652413
+- time:0.015171s
+-}
+
+permNums :: Integral a => a -> [a]
+permNums n = (map toNum . permutations) [1..n]
+  where toNum = foldl' ((+) . (* 10)) 0
 
 solve :: Integer
-solve = toInteger $ maximum $ filter isPandigitalN $ takeWhile (< 10^9) primes
+solve = (toInteger . maximum . filter isPrime . concatMap permNums) [4, 7]

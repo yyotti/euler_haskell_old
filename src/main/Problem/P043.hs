@@ -31,6 +31,28 @@ import Control.Monad
 - [結果]
 - 16695334890
 - time:0.21519s
+-
+- [コミット]
+- 4020d1c
+-}
+
+{-
+- [方針3]
+- 方針2の考え方をもとに、「条件を満たすパンデジタル数を探す」のではなく「生成する」
+- 方向で考える。
+-
+-   1. 下3桁の候補を出す
+-   2. 1で挙げた数字の1つを(d(8)d(9)d(10))(3桁)とする。
+-   3. [0..9]のうちd(8)～d(10)とかぶらないものを1つ選び、d(7)とする。
+-   4. d(7)d(8)d(9)が13で割れるものを残す。
+-   5. これを繰り返す。
+- の手順で、条件を満たすパンデジタル数が生成できることになる。
+- 最後に1桁だけ余るのが例外になってしまうので、1も素数としてd(1)d(2)d(3)が1で割り切れる
+- かどうかのチェックを加えることで全ての桁を同じ処理で連結していける。
+-
+- [結果]
+- 16695334890
+- time:0.000686s
 -}
 
 perms :: (Eq a) => Int -> [a] -> [[a]]
@@ -38,23 +60,15 @@ perms 0 _ = [[]]
 perms _ [] = []
 perms n xs = concatMap (\ x -> map (x:) $ perms (n-1) $ filter (/= x) xs) xs
 
-mod17 :: Integral a => [[a]]
-mod17 = (filter ((== 0) . (`mod` 17) . toNum) . perms 3) [0..9]
-
-sliding :: Int -> [a] -> [[a]]
-sliding _ [] = []
-sliding n ls@(_:xs) | length ls <= n = [ls]
-                    | otherwise = take n ls : sliding n xs
-
-slidingNums :: Integral a => Int -> [a] -> [a]
-slidingNums = (map toNum .) . sliding
-
-isDivisiblePandigital :: Integral a => [a] -> Bool
-isDivisiblePandigital = all (== 0) . zipWith (flip mod) primes . (tail . slidingNums 3)
-
-pandigitals :: Integral a => [[a]]
-pandigitals = concatMap (ap (map . flip (++)) (permutations . ([0..9] \\))) mod17
+mkNum :: Integral a => [a] -> [a] -> [a] -> [[a]]
+mkNum [] ls _ = [ls]
+-- mkNum (p:ps) ls ds = concatMap (\ xs -> mkNum ps (head xs : ls) (filter (/= head xs) ds)) concatables
+-- ↓後になって読めるかな・・・
+mkNum (p:ps) ls ds = concatMap (ap (mkNum ps . (:ls) . head) (flip filter ds . ((/=) . head))) concatNums
+  where concatNums = map (: take 2 ls) $ filter ((== 0) . (`mod` p) . toNum . (: take 2 ls)) ds
 
 solve :: Integer
-solve = (toInteger . sum . map toNum) divisiblePandigitals
-  where divisiblePandigitals = filter (ap ((&&) . ((/= 0) . head)) isDivisiblePandigital) pandigitals
+solve = (toInteger . sum . map toNum . concatMap (ap (mkNum primes') ([0..9] \\))) mod17
+  where primes' = (reverse . (1:) . takeWhile (< 17)) primes
+        mod17 = (filter ((== 0) . (`mod` 17) . toNum) . perms 3) [0..9]
+

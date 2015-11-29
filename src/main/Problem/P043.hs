@@ -33,15 +33,10 @@ import Control.Monad
 - time:0.21519s
 -}
 
-combinations :: Int -> [a] -> [[a]]
-combinations 0 _ = [[]]
-combinations _ [] = []
-combinations r (x:xs) = comb1 ++ comb2
-  where comb1 = map (x:) $ combinations (r - 1) xs
-        comb2 = combinations r xs
-
 perms :: (Eq a) => Int -> [a] -> [[a]]
-perms = (concatMap permutations .) . combinations
+perms 0 _ = [[]]
+perms _ [] = []
+perms n xs = concatMap (\ x -> map (x:) $ perms (n-1) $ filter (/= x) xs) xs
 
 mod17 :: Integral a => [[a]]
 mod17 = (filter ((== 0) . (`mod` 17) . toNum) . perms 3) [0..9]

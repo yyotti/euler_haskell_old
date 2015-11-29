@@ -8,22 +8,6 @@ main = hspec spec
 
 spec :: Spec
 spec = do
-  describe "combinations" $ do
-    it "returns [] when (r, ls) = (_, [])" $ do
-      combinations 2 ([] :: [Char]) `shouldBe` []
-    it "returns [[]] when (r, ls) = (0, _)" $ do
-      combinations 0 [1 :: Int, 2, 3] `shouldBe` [[]]
-    it "returns [[1],[2],[3]] when (r, ls) = (1, [1,2,3])" $ do
-      combinations 1 [1 :: Int, 2, 3] `shouldBe` [[1], [2], [3]]
-    it "returns [[1,2],[1,3],[2,3]] when (r, ls) = (2, [1,2,3])" $ do
-      combinations 2 [1 :: Int, 2, 3] `shouldBe` [[1, 2], [1, 3], [2, 3]]
-    it "returns [[1,2,3]] when (r, ls) = (3, [1,2,3])" $ do
-      combinations 3 [1 :: Int, 2, 3] `shouldBe` [[1, 2, 3]]
-    it "returns [] when (r, ls) = (4, [1,2,3])" $ do
-      combinations 4 [1 :: Int, 2, 3] `shouldBe` []
-    it "returns [\"ab\",\"ac\",\"ad\",\"bc\",\"bd\",\"cd\"] when (r, ls) = (2, \"abcd\")" $ do
-      combinations 2 "abcd" `shouldBe` ["ab", "ac", "ad", "bc", "bd", "cd"]
-
   describe "perms" $ do
     it "returns [[]] when (n,ls) = (0,[1])" $ do
       perms 0 [1] `shouldBe` [[]]
@@ -38,7 +22,7 @@ spec = do
     it "returns [[1],[2],[3]] when (n,ls) = (1,[1,2,3])" $ do
       perms 1 [1, 2, 3] `shouldBe` [[1], [2], [3]]
     it "returns [[1,2],[1,3],[2,1],[2,3],[3,1],[3,2]] when (n,ls) = (2,[1,2,3])" $ do
-      perms 2 [1, 2, 3] `shouldBe` [[1, 2], [2, 1], [1, 3], [3, 1], [2, 3], [3, 2]]
+      perms 2 [1, 2, 3] `shouldBe` [[1, 2], [1, 3], [2, 1], [2, 3], [3, 1], [3, 2]]
     it "returns 504 elements when n ls = (3, [1,2,3,4,5,6,7,8,9]" $ do
       length (perms 3 [1, 2, 3, 4, 5, 6, 7, 8, 9]) `shouldBe` 504
 

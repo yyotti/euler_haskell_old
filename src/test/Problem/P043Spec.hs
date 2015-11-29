@@ -8,6 +8,44 @@ main = hspec spec
 
 spec :: Spec
 spec = do
+  describe "combinations" $ do
+    it "returns [] when (r, ls) = (_, [])" $ do
+      combinations 2 ([] :: [Char]) `shouldBe` []
+    it "returns [[]] when (r, ls) = (0, _)" $ do
+      combinations 0 [1 :: Int, 2, 3] `shouldBe` [[]]
+    it "returns [[1],[2],[3]] when (r, ls) = (1, [1,2,3])" $ do
+      combinations 1 [1 :: Int, 2, 3] `shouldBe` [[1], [2], [3]]
+    it "returns [[1,2],[1,3],[2,3]] when (r, ls) = (2, [1,2,3])" $ do
+      combinations 2 [1 :: Int, 2, 3] `shouldBe` [[1, 2], [1, 3], [2, 3]]
+    it "returns [[1,2,3]] when (r, ls) = (3, [1,2,3])" $ do
+      combinations 3 [1 :: Int, 2, 3] `shouldBe` [[1, 2, 3]]
+    it "returns [] when (r, ls) = (4, [1,2,3])" $ do
+      combinations 4 [1 :: Int, 2, 3] `shouldBe` []
+    it "returns [\"ab\",\"ac\",\"ad\",\"bc\",\"bd\",\"cd\"] when (r, ls) = (2, \"abcd\")" $ do
+      combinations 2 "abcd" `shouldBe` ["ab", "ac", "ad", "bc", "bd", "cd"]
+
+  describe "perms" $ do
+    it "returns [[]] when (n,ls) = (0,[1])" $ do
+      perms 0 [1] `shouldBe` [[]]
+    it "returns [[1]] when (n,ls) = (1,[1])" $ do
+      perms 1 [1] `shouldBe` [[1]]
+    it "returns [] when (n,ls) = (2,[1])" $ do
+      perms 2 [1] `shouldBe` []
+    it "returns [[1],[2]] when (n,ls) = (1,[1,2])" $ do
+      perms 1 [1, 2] `shouldBe` [[1], [2]]
+    it "returns [[1,2],[2,1]] when (n,ls) = (2,[1,2])" $ do
+      perms 2 [1, 2] `shouldBe` [[1, 2],[2, 1]]
+    it "returns [[1],[2],[3]] when (n,ls) = (1,[1,2,3])" $ do
+      perms 1 [1, 2, 3] `shouldBe` [[1], [2], [3]]
+    it "returns [[1,2],[1,3],[2,1],[2,3],[3,1],[3,2]] when (n,ls) = (2,[1,2,3])" $ do
+      perms 2 [1, 2, 3] `shouldBe` [[1, 2], [2, 1], [1, 3], [3, 1], [2, 3], [3, 2]]
+    it "returns 504 elements when n ls = (3, [1,2,3,4,5,6,7,8,9]" $ do
+      length (perms 3 [1, 2, 3, 4, 5, 6, 7, 8, 9]) `shouldBe` 504
+
+  describe "mod17" $ do
+    it "has 44 elements" $ do
+      length mod17 `shouldBe` 44
+
   describe "sliding" $ do
     it "returns [] when (n,ls) = (2,[])" $ do
       sliding 2 "" `shouldBe` []
@@ -39,6 +77,10 @@ spec = do
       isDivisiblePandigital [1, 4, 0, 6, 3, 5, 7, 2, 8, 9] `shouldBe` True
     it "returns False when ls = [1,4,0,6,3,5,7,2,8,9]" $ do
       isDivisiblePandigital [1, 4, 0, 6, 3, 5, 7, 2, 9, 8] `shouldBe` False
+
+  describe "pandigitals" $ do
+    it "has 221760 elements" $ do
+      length pandigitals `shouldBe` 221760
 
   describe "solve" $ do
     it "is 16695334890" $ do

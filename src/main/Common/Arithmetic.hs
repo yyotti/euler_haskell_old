@@ -39,5 +39,7 @@ primitivePythagoreanMNs :: Integral a =>  [(a, a)]
 primitivePythagoreanMNs = concatMap (\ m -> map (\ n -> (m, n)) $ filter (\ n -> odd (m - n) && gcd m n == 1) [1..(m - 1)]) [1..]
 
 isSquare :: Integral a => a -> Bool
-isSquare = ap ((==) . fromIntegral . floor . rt) rt
-  where rt = sqrt . fromIntegral
+isSquare = isInteger . sqrt . fromIntegral
+
+isInteger :: RealFrac a => a -> Bool
+isInteger = ap ((==) . id) (fromIntegral . truncate)

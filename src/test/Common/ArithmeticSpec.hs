@@ -96,3 +96,12 @@ spec = do
     it "returns True when n = 9" $ do
       isSquare 9 `shouldBe` True
 
+  describe "isInteger" $ do
+    it "returns True when x = 1" $ do
+      isInteger 1 `shouldBe` True
+    it "returns True when x = 2.0" $ do
+      isInteger 2.0 `shouldBe` True
+    it "returns False when x = 3.14" $ do
+      isInteger 3.14 `shouldBe` False
+    it "returns True when x = √4" $ do
+      isInteger (sqrt 4) `shouldBe` True

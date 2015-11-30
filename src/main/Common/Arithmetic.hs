@@ -1,5 +1,6 @@
 module Common.Arithmetic where
 import Data.List
+import Control.Monad
 
 {-# SPECIALIZE fib :: [Int] #-}
 {-# SPECIALIZE fib :: [Integer] #-}
@@ -36,3 +37,7 @@ fact n | n < 0 = 0
 {-# SPECIALIZE primitivePythagoreanMNs :: [(Integer, Integer)] #-}
 primitivePythagoreanMNs :: Integral a =>  [(a, a)]
 primitivePythagoreanMNs = concatMap (\ m -> map (\ n -> (m, n)) $ filter (\ n -> odd (m - n) && gcd m n == 1) [1..(m - 1)]) [1..]
+
+isSquare :: Integral a => a -> Bool
+isSquare = ap ((==) . fromIntegral . floor . rt) rt
+  where rt = sqrt . fromIntegral

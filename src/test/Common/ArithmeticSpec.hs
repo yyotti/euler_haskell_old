@@ -81,3 +81,18 @@ spec = do
   describe "primitivePythagoreanMNs" $ do
     it "first 10 terms are [(2,1),(3,2),(4,1),(4,3),(5,2),(5,4),(6,1),(6,5),(7,2),(7,4)]" $ do
      take 10 primitivePythagoreanMNs `shouldBe` [(2, 1), (3, 2), (4, 1), (4, 3), (5, 2), (5, 4), (6, 1), (6, 5), (7, 2), (7, 4)]
+
+  describe "isSquare" $ do
+    it "returns True when n = 1" $ do
+      isSquare 1 `shouldBe` True
+    it "returns False when n = 2" $ do
+      isSquare 2 `shouldBe` False
+    it "returns False when n = 3" $ do
+      isSquare 3 `shouldBe` False
+    it "returns True when n = 4" $ do
+      isSquare 4 `shouldBe` True
+    it "returns False when n = 5" $ do
+      isSquare 5 `shouldBe` False
+    it "returns True when n = 9" $ do
+      isSquare 9 `shouldBe` True
+

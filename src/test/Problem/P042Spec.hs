@@ -8,20 +8,6 @@ main = hspec spec
 
 spec :: Spec
 spec = do
-  describe "isSquare" $ do
-    it "returns True when n = 1" $ do
-      isSquare 1 `shouldBe` True
-    it "returns False when n = 2" $ do
-      isSquare 2 `shouldBe` False
-    it "returns False when n = 3" $ do
-      isSquare 3 `shouldBe` False
-    it "returns True when n = 4" $ do
-      isSquare 4 `shouldBe` True
-    it "returns False when n = 5" $ do
-      isSquare 5 `shouldBe` False
-    it "returns True when n = 9" $ do
-      isSquare 9 `shouldBe` True
-
   describe "isTriangleNumber" $ do
     it "returns True when n = 1" $ do
       isTriangleNumber 1 `shouldBe` True

@@ -1,7 +1,7 @@
 module Problem.P042 where
 import Common.Util
 import Data.Char
-import Control.Monad
+import Common.Arithmetic
 
 {-
 - Coded triangle numbers
@@ -20,10 +20,6 @@ import Control.Monad
 - 162
 - time:0.003053s
 -}
-
-isSquare :: Integral a => a -> Bool
-isSquare = ap ((==) . fromIntegral . floor . rt) rt
-  where rt = sqrt . fromIntegral
 
 isTriangleNumber :: Integral a => a -> Bool
 isTriangleNumber n = isSquare $ 1 + 8 * n

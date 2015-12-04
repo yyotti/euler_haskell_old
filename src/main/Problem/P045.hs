@@ -1,4 +1,8 @@
 module Problem.P045 where
+import Common.Arithmetic
+import Data.List
+import Data.Maybe
+import Control.Monad
 
 {-
 - Triangular, pentagonal, and hexagonal
@@ -26,21 +30,44 @@ module Problem.P045 where
 - [結果]
 - 1533776805
 - time:0.015032s
+-
+- [コミット]
+- 13e3e8d
 -}
 
-triangles :: Integral a => [a]
-triangles = 1 : zipWith (+) triangles [2..]
-
-pentagonals :: Integral a => [a]
-pentagonals = 1 : zipWith (+) pentagonals [4,7..]
+{-
+- [方針3]
+- P044でやったように、五角数か否かの判定は
+-   P(n) = n(3n-1)/2 = m
+- として、
+-   3n^2 - n - 2m = 0
+- が整数解を持てばよい。それには判別式をdとして
+-   d = 1 - 4*3*(-2m) = 1 + 24m
+-   n = (1 + √d)/6
+- が整数になれば五角数と判定できる。
+-
+- 同様に、三角数か否かの判定は
+-   T(n) = n(n+1)/2 = m
+- として、
+-   n^2 + n - 2m = 0
+- が整数解を持てばよい。それには判別式をdとして
+-   d = 1 - 4*1*(-2m) = 1 + 8m
+-   n = (1 + √d)/2
+- が整数になれば三角数と判定できる。
+-
+- [結果]
+- 1533776805
+- time:0.007307s
+-}
 
 hexagonals :: Integral a => [a]
 hexagonals = 1 : zipWith (+) hexagonals [5,9..]
 
-findNextSame :: Integral a => [a] -> [a] -> [a] -> a
-findNextSame (h:hs) ps ts | head (dropWhile (< h) ps) == h && head (dropWhile (< h) ts) == h = h
-                          | otherwise = findNextSame hs (dropWhile (< h) ps) (dropWhile (< h) ts)
-findNextSame _ _ _ = 0 -- ここには入らないはず
+isPentagonal :: Integral a => a -> Bool
+isPentagonal = isInteger . (/6) . (1+) . sqrt . (1+) . (24*) . fromIntegral
+
+isTriangle :: Integral a => a -> Bool
+isTriangle = isInteger . (/2) . (1+) . sqrt . (1+) . (8*) . fromIntegral
 
 solve :: Int -> Integer
-solve n = toInteger $ findNextSame (dropWhile (<= n) hexagonals) (dropWhile (<= n) pentagonals) (dropWhile (<= n) triangles)
+solve = toInteger . fromJust . find (ap ((&&) . isTriangle) isPentagonal) . flip dropWhile hexagonals . (>=)

@@ -8,21 +8,37 @@ main = hspec spec
 
 spec :: Spec
 spec = do
-  describe "triangles" $ do
-    it "first 10 terms are [1,3,6,10,15,21,28,36,45,55]" $ do
-      take 10 triangles `shouldBe` [1, 3, 6, 10, 15, 21, 28, 36, 45, 55]
+  describe "isPentagonal" $ do
+    it "returns True when n = 1" $ do
+      isPentagonal 1 `shouldBe` True
+    it "returns False when n = 2" $ do
+      isPentagonal 2 `shouldBe` False
+    it "returns False when n = 3" $ do
+      isPentagonal 3 `shouldBe` False
+    it "returns False when n = 4" $ do
+      isPentagonal 4 `shouldBe` False
+    it "returns True when n = 5" $ do
+      isPentagonal 5 `shouldBe` True
+    it "returns False when n = 6" $ do
+      isPentagonal 6 `shouldBe` False
+    it "returns True when n = 12" $ do
+      isPentagonal 12 `shouldBe` True
 
-  describe "pentagonals" $ do
-    it "first 10 terms are [1,5,12,22,35,51,70,92,117,145]" $ do
-      take 10 pentagonals `shouldBe` [1, 5, 12, 22, 35, 51, 70, 92, 117, 145]
-
-  describe "triangles" $ do
-    it "first 10 terms are [1,6,15,28,45,66,91,120,153,190]" $ do
-      take 10 hexagonals `shouldBe` [1, 6, 15, 28, 45, 66, 91, 120, 153, 190]
-
-  describe "findNextSame" $ do
-    it "returns 3 when (ts,ps,hs) = ([1,3,5],[1,2,3],[0,3])" $ do
-      findNextSame [1, 3, 5] [1, 2, 3] [0, 3] `shouldBe` 3
+  describe "isTriangle" $ do
+    it "returns True when n = 1" $ do
+      isTriangle 1 `shouldBe` True
+    it "returns False when n = 2" $ do
+      isTriangle 2 `shouldBe` False
+    it "returns True when n = 3" $ do
+      isTriangle 3 `shouldBe` True
+    it "returns False when n = 4" $ do
+      isTriangle 4 `shouldBe` False
+    it "returns False when n = 5" $ do
+      isTriangle 5 `shouldBe` False
+    it "returns True when n = 6" $ do
+      isTriangle 6 `shouldBe` True
+    it "returns False when n = 12" $ do
+      isTriangle 12 `shouldBe` False
 
   describe "solve" $ do
     it "returns 1 when n = 0" $ do
